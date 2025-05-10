@@ -6,6 +6,7 @@ export default function Navbar() {
       <h1>Name</h1>
       <Link href={"/"}>Home</Link>
       <Link href={"/base-converter"}>Base Converter</Link>
+      <Link href={"/text-encryption/caesar-cipher"}>Caesar Cipher</Link>
     </nav>
   );
 }

@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { baseConvert } from "./actions";
-import { SubmitButton } from "../components/SubmitButton";
+import { SubmitButton } from "@/components/SubmitButton";
 
 export default function BaseConverter() {
   const [number, setNumber] = useState("");
@@ -26,14 +26,7 @@ export default function BaseConverter() {
             required
             type="text"
             pattern="[a-zA-Z0-9]+"
-            onInvalid={(e) =>
-              (e.target as HTMLInputElement).setCustomValidity(
-                "Invalid number format"
-              )
-            }
-            onInput={(e) =>
-              (e.target as HTMLInputElement).setCustomValidity("")
-            }
+            title="Only alphanumeric characters are allowed"
             value={number}
             onChange={(e) => setNumber(e.target.value)}
           />
