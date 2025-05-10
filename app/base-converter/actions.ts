@@ -25,8 +25,14 @@ export async function baseConvert(formData: FormData) {
     toBase: parseInt(formData.get("toBase") as string),
   };
 
-  validateInput(input);
-
+  try {
+    validateInput(input);
+  } catch (error) {
+    return (
+      "Error: " +
+      (error instanceof Error ? error.message : "An unknown error occurred")
+    );
+  }
   return parseInt(input.number, input.fromBase)
     .toString(input.toBase)
     .toUpperCase();

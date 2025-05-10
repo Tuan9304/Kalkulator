@@ -15,17 +15,8 @@ export default function BaseConverter() {
       <form
         className=""
         action={async (formData: FormData) => {
-          try {
-            const updatedResult = await baseConvert(formData);
-            setResult(updatedResult);
-          } catch (error) {
-            setResult(
-              "Error: " +
-                (error instanceof Error
-                  ? error.message
-                  : "An unknown error occurred")
-            );
-          }
+          const updatedResult = await baseConvert(formData);
+          setResult(updatedResult);
         }}
       >
         <label>
