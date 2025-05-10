@@ -1,6 +1,26 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
+
+@theme {
+  --color-primary: #7856ff;
+}
+
+/*
+  The default border color has changed to `currentcolor` in Tailwind CSS v4,
+  so we've added these compatibility styles to make sure everything still
+  looks the same as it did with Tailwind CSS v3.
+
+  If we ever want to remove these styles, we need to add an explicit border
+  color utility to any element that depends on these defaults.
+*/
+@layer base {
+  *,
+  ::after,
+  ::before,
+  ::backdrop,
+  ::file-selector-button {
+    border-color: var(--color-gray-200, currentcolor);
+  }
+}
 
 /* base styles */
 body {
@@ -43,7 +63,7 @@ main nav {
 /* button styles */
 button {
   @apply px-3 py-2 
-      rounded-sm 
+      rounded-xs 
       flex justify-between items-center gap-2
       text-sm;
 }
@@ -71,7 +91,8 @@ form textarea,
 form select {
   @apply block 
       mt-2 my-4 px-2 py-1 
-      rounded-sm w-full;
+      rounded-xs w-full
+      bg-white;
 }
 form button {
   @apply block mx-auto;
@@ -84,7 +105,7 @@ form button {
       bg-red-300
       text-red-800 
       py-1 px-2 
-      rounded-sm
+      rounded-xs
       block
       max-w-fit
       my-4 mx-auto;
@@ -93,7 +114,7 @@ form button {
 /* card styles */
 .card {
   @apply bg-white 
-      shadow-sm 
+      shadow-xs 
       rounded-md 
       py-3 px-4 my-4 
       relative 
