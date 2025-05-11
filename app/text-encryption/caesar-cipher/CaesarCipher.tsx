@@ -7,6 +7,7 @@ import { SubmitButton } from "@/components/SubmitButton";
 export default function CaesarCipher() {
   const [text, setText] = useState("");
   const [shift, setShift] = useState("");
+  const [action, setAction] = useState("encrypt");
   const [result, setResult] = useState("");
 
   return (
@@ -35,13 +36,35 @@ export default function CaesarCipher() {
           <input
             name="shift"
             required
-            type="number"
-            pattern="\d+"
+            type="text"
+            pattern="^-?\d+$"
             title="Only integers are allowed"
             value={shift}
             onChange={(e) => setShift(e.target.value)}
           />
         </label>
+        <div className="flex gap-6 mt-2 my-3 px-2 py-1">
+          <div className="flex items-center gap-2">
+            <input
+              type="radio"
+              name="action"
+              value="encrypt"
+              defaultChecked={action === "encrypt"}
+              onChange={(e) => setAction(e.target.value)}
+            />
+            <label htmlFor="encrypt">Encrypt</label>
+          </div>
+          <div className="flex items-center gap-2">
+            <input
+              type="radio"
+              name="action"
+              value="decrypt"
+              defaultChecked={action === "decrypt"}
+              onChange={(e) => setAction(e.target.value)}
+            />
+            <label htmlFor="decrypt">Decrypt</label>
+          </div>
+        </div>
         <SubmitButton />
       </form>
       <p>Result: {result}</p>
