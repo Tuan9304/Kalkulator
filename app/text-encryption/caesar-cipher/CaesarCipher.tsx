@@ -25,8 +25,9 @@ export default function CaesarCipher() {
             name="text"
             required
             type="text"
-            pattern="[A-Z]+"
-            title="Only uppercase letters are allowed"
+            pattern="[A-Za-z]+"
+            title="Only letters are allowed"
+            placeholder="Enter text to encrypt/decrypt"
             value={text}
             onChange={(e) => setText(e.target.value)}
           />
@@ -39,6 +40,7 @@ export default function CaesarCipher() {
             type="text"
             pattern="^-?\d+$"
             title="Only integers are allowed"
+            placeholder="Enter number of shifts right"
             value={shift}
             onChange={(e) => setShift(e.target.value)}
           />

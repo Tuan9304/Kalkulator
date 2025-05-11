@@ -27,6 +27,7 @@ export default function BaseConverter() {
             type="text"
             pattern="[a-zA-Z0-9]+"
             title="Only alphanumeric characters are allowed"
+            placeholder="Enter number to convert"
             value={number}
             onChange={(e) => setNumber(e.target.value)}
           />
@@ -40,6 +41,7 @@ export default function BaseConverter() {
             min="2"
             max="36"
             value={fromBase}
+            placeholder="Enter base of the number"
             onChange={(e) => setFromBase(e.target.value)}
           />
         </label>
@@ -52,6 +54,7 @@ export default function BaseConverter() {
             min="2"
             max="36"
             value={toBase}
+            placeholder="Enter base to convert to"
             onChange={(e) => setToBase(e.target.value)}
           />
         </label>
