@@ -12,8 +12,8 @@ import { Form, FormField } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { RadioGroup } from "@/components/ui/radio-group";
 
-import { vigenereEncrypt } from "./actions";
-import { vigenereCipherSchema } from "./vigenereCipherSchema";
+import { vigenereCipherSchema } from "./schema";
+import { vigenereEncrypt } from "./utils";
 
 export default function VigenereCipher() {
   const [result, setResult] = useState("");

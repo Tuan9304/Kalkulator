@@ -1,6 +1,6 @@
 import { z } from "zod";
 
-import { baseConverterSchema } from "./baseConverterSchema";
+import { baseConverterSchema } from "./schema";
 
 export function baseConvert(values: z.infer<typeof baseConverterSchema>) {
   const { fromBase, number, toBase } = values;

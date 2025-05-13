@@ -10,8 +10,8 @@ import { SubmitButton } from "@/components/SubmitButton";
 import { Form, FormField } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 
-import { baseConvert } from "./actions";
-import { baseConverterSchema } from "./baseConverterSchema";
+import { baseConverterSchema } from "./schema";
+import { baseConvert } from "./utils";
 
 export default function BaseConverter() {
   const [result, setResult] = useState("");

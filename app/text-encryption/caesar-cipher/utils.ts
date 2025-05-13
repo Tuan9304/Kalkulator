@@ -1,17 +1,17 @@
 import { z } from "zod";
 
-import { vigenereCipherSchema } from "./vigenereCipherSchema";
+import { caesarCipherSchema } from "./schema";
 
-export function vigenereEncrypt(values: z.infer<typeof vigenereCipherSchema>) {
-  const { action, key, text } = values;
+export function caesarEncrypt(values: z.infer<typeof caesarCipherSchema>) {
+  const { action, shift, text } = values;
 
   const result = text
     .split("")
-    .map((char, index) => {
+    .map((char) => {
       const firstCharCode = char.toUpperCase() === char ? 65 : 97;
-      const shift = key[index % key.length].toUpperCase().charCodeAt(0) - 65;
-
       return String.fromCharCode(
+        // ((char.charCodeAt(0) - firstCharCode + input.shift) % 26) + firstCharCode
+        // The above line is the original Caesar cipher logic
         ((char.charCodeAt(0) -
           firstCharCode +
           130 +

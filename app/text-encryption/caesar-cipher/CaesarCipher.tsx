@@ -12,8 +12,8 @@ import { Form, FormField } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { RadioGroup } from "@/components/ui/radio-group";
 
-import { caesarEncrypt } from "./actions";
-import { caesarCipherSchema } from "./caesarCipherSchema";
+import { caesarCipherSchema } from "./schema";
+import { caesarEncrypt } from "./utils";
 
 export default function CaesarCipher() {
   const [result, setResult] = useState("");
