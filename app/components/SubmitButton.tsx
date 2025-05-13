@@ -2,12 +2,14 @@
 
 import { useFormStatus } from "react-dom";
 
+import { Button } from "@/components/ui/button";
+
 export function SubmitButton() {
   const { pending } = useFormStatus();
 
   return (
-    <button type="submit" disabled={pending} className="btn-primary">
+    <Button className="btn-primary" disabled={pending} type="submit">
       Calculate
-    </button>
+    </Button>
   );
 }

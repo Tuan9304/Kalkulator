@@ -1,66 +1,77 @@
 "use client";
 
+import { zodResolver } from "@hookform/resolvers/zod";
 import { useState } from "react";
-import { baseConvert } from "./actions";
+import { useForm } from "react-hook-form";
+import { z } from "zod";
+
+import FormInput from "@/components/FormInput";
 import { SubmitButton } from "@/components/SubmitButton";
+import { Form, FormField } from "@/components/ui/form";
+import { Input } from "@/components/ui/input";
+
+import { baseConvert } from "./actions";
+import { baseConverterSchema } from "./baseConverterSchema";
 
 export default function BaseConverter() {
-  const [number, setNumber] = useState("");
-  const [fromBase, setFromBase] = useState("");
-  const [toBase, setToBase] = useState("");
   const [result, setResult] = useState("");
 
+  const form = useForm<z.infer<typeof baseConverterSchema>>({
+    defaultValues: {
+      fromBase: 10,
+      number: "",
+      toBase: 2,
+    },
+    resolver: zodResolver(baseConverterSchema),
+  });
+
+  const onSubmit = (values: z.infer<typeof baseConverterSchema>) => {
+    const result = baseConvert(values);
+
+    setResult(result);
+  };
+
   return (
-    <>
-      <form
-        className=""
-        action={async (formData: FormData) => {
-          const updatedResult = await baseConvert(formData);
-          setResult(updatedResult);
-        }}
-      >
-        <label>
-          <span>Number</span>
-          <input
-            name="number"
-            required
-            type="text"
-            pattern="[a-zA-Z0-9]+"
-            title="Only alphanumeric characters are allowed"
-            placeholder="Enter number to convert"
-            value={number}
-            onChange={(e) => setNumber(e.target.value)}
-          />
-        </label>
-        <label>
-          <span>From Base</span>
-          <input
-            name="fromBase"
-            required
-            type="number"
-            min="2"
-            max="36"
-            value={fromBase}
-            placeholder="Enter base of the number"
-            onChange={(e) => setFromBase(e.target.value)}
-          />
-        </label>
-        <label>
-          <span>To Base</span>
-          <input
-            name="toBase"
-            required
-            type="number"
-            min="2"
-            max="36"
-            value={toBase}
-            placeholder="Enter base to convert to"
-            onChange={(e) => setToBase(e.target.value)}
-          />
-        </label>
+    <Form {...form}>
+      <form onSubmit={form.handleSubmit(onSubmit)}>
+        <FormField
+          control={form.control}
+          name="number"
+          render={({ field }) => (
+            <FormInput label="Number">
+              <Input placeholder="Enter number to convert" {...field} />
+            </FormInput>
+          )}
+        />
+        <FormField
+          control={form.control}
+          name="fromBase"
+          render={({ field }) => (
+            <FormInput label="From Base">
+              <Input
+                placeholder="Enter base of the number"
+                type="number"
+                {...field}
+              />
+            </FormInput>
+          )}
+        />
+        <FormField
+          control={form.control}
+          name="toBase"
+          render={({ field }) => (
+            <FormInput label="To Base">
+              <Input
+                placeholder="Enter base to convert to"
+                type="number"
+                {...field}
+              />
+            </FormInput>
+          )}
+        />
         <SubmitButton />
       </form>
       <p>Result: {result}</p>
-    </>
+    </Form>
   );
 }

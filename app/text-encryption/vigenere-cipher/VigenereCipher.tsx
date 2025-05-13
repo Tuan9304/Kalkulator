@@ -1,75 +1,80 @@
 "use client";
 
+import { zodResolver } from "@hookform/resolvers/zod";
 import { useState } from "react";
-import { vigenereEncrypt } from "./actions";
+import { useForm } from "react-hook-form";
+import { z } from "zod";
+
+import FormInput from "@/components/FormInput";
+import FormRadio from "@/components/FormRadio";
 import { SubmitButton } from "@/components/SubmitButton";
+import { Form, FormField } from "@/components/ui/form";
+import { Input } from "@/components/ui/input";
+import { RadioGroup } from "@/components/ui/radio-group";
+
+import { vigenereEncrypt } from "./actions";
+import { vigenereCipherSchema } from "./vigenereCipherSchema";
 
 export default function VigenereCipher() {
-  const [text, setText] = useState("");
-  const [key, setKey] = useState("");
-  const [action, setAction] = useState("encrypt");
   const [result, setResult] = useState("");
 
+  const form = useForm<z.infer<typeof vigenereCipherSchema>>({
+    defaultValues: {
+      action: "encrypt",
+      key: "",
+      text: "",
+    },
+    resolver: zodResolver(vigenereCipherSchema),
+  });
+
+  const onSubmit = (values: z.infer<typeof vigenereCipherSchema>) => {
+    const result = vigenereEncrypt(values);
+
+    setResult(result);
+  };
   return (
-    <>
-      <form
-        className=""
-        action={async (formData: FormData) => {
-          const updatedResult = await vigenereEncrypt(formData);
-          setResult(updatedResult);
-        }}
-      >
-        <label>
-          <span>Text</span>
-          <input
-            name="text"
-            required
-            type="text"
-            pattern="[A-Za-z]+"
-            title="Only letters are allowed"
-            placeholder="Enter text to encrypt/decrypt"
-            value={text}
-            onChange={(e) => setText(e.target.value)}
-          />
-        </label>
-        <label>
-          <span>Key</span>
-          <input
-            name="key"
-            required
-            type="text"
-            pattern="[A-Za-z]+"
-            title="Only letters are allowed"
-            placeholder="Enter key for encryption/decryption"
-            value={key}
-            onChange={(e) => setKey(e.target.value)}
-          />
-        </label>
-        <div className="flex gap-6 mt-2 my-3 px-2 py-1">
-          <div className="flex items-center gap-2">
-            <input
-              type="radio"
-              name="action"
-              value="encrypt"
-              defaultChecked={action === "encrypt"}
-              onChange={(e) => setAction(e.target.value)}
-            />
-            <label htmlFor="encrypt">Encrypt</label>
-          </div>
-          <div className="flex items-center gap-2">
-            <input
-              type="radio"
-              name="action"
-              value="decrypt"
-              defaultChecked={action === "decrypt"}
-              onChange={(e) => setAction(e.target.value)}
-            />
-            <label htmlFor="decrypt">Decrypt</label>
-          </div>
-        </div>
+    <Form {...form}>
+      <form onSubmit={form.handleSubmit(onSubmit)}>
+        <FormField
+          control={form.control}
+          name="text"
+          render={({ field }) => (
+            <FormInput label="Text">
+              <Input placeholder="Enter text to encrypt/decrypt" {...field} />
+            </FormInput>
+          )}
+        />
+        <FormField
+          control={form.control}
+          name="key"
+          render={({ field }) => (
+            <FormInput label="Key">
+              <Input
+                placeholder="Enter key for encryption/decryption"
+                {...field}
+              />
+            </FormInput>
+          )}
+        />
+        <FormField
+          control={form.control}
+          name="action"
+          render={({ field }) => (
+            <FormInput label="Action">
+              <RadioGroup
+                className="flex"
+                defaultValue={field.value}
+                onValueChange={field.onChange}
+              >
+                <FormRadio label="Encrypt" value="encrypt" />
+                <FormRadio label="Decrypt" value="decrypt" />
+              </RadioGroup>
+            </FormInput>
+          )}
+        />
         <SubmitButton />
       </form>
       <p>Result: {result}</p>
-    </>
+    </Form>
   );
 }

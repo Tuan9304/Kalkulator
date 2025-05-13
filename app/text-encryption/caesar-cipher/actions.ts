@@ -1,13 +1,11 @@
-"use server";
+import { z } from "zod";
 
-export async function caesarEncrypt(formData: FormData) {
-  const input = {
-    text: formData.get("text") as string,
-    shift: parseInt(formData.get("shift") as string),
-    action: formData.get("action") as string,
-  };
+import { caesarCipherSchema } from "./caesarCipherSchema";
 
-  const encryptedText = input.text
+export function caesarEncrypt(values: z.infer<typeof caesarCipherSchema>) {
+  const { action, shift, text } = values;
+
+  const result = text
     .split("")
     .map((char) => {
       const firstCharCode = char.toUpperCase() === char ? 65 : 97;
@@ -17,12 +15,12 @@ export async function caesarEncrypt(formData: FormData) {
         ((char.charCodeAt(0) -
           firstCharCode +
           130 +
-          ((input.shift * (input.action === "encrypt" ? 1 : -1)) % 26)) %
+          ((shift * (action === "encrypt" ? 1 : -1)) % 26)) %
           26) +
         firstCharCode
       );
     })
     .join("");
 
-  return encryptedText;
+  return result;
 }

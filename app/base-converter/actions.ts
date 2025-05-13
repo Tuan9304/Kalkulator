@@ -1,39 +1,31 @@
-"use server";
+import { z } from "zod";
 
-function validateInput(input: {
-  number: string;
-  fromBase: number;
-  toBase: number;
-}) {
-  const validChars = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ".slice(
-    0,
-    input.fromBase
-  );
-  const regex = new RegExp(`^[${validChars}]+$`, "i");
+import { baseConverterSchema } from "./baseConverterSchema";
 
-  if (!regex.test(input.number)) {
-    throw new Error(
-      `The number contains invalid characters for base ${input.fromBase}.`
-    );
-  }
-}
-
-export async function baseConvert(formData: FormData) {
-  const input = {
-    number: (formData.get("number") as string).toUpperCase(),
-    fromBase: parseInt(formData.get("fromBase") as string),
-    toBase: parseInt(formData.get("toBase") as string),
-  };
+export function baseConvert(values: z.infer<typeof baseConverterSchema>) {
+  const { fromBase, number, toBase } = values;
 
   try {
-    validateInput(input);
+    validateInput(number, fromBase);
   } catch (error) {
     return (
       "Error: " +
       (error instanceof Error ? error.message : "An unknown error occurred")
     );
   }
-  return parseInt(input.number, input.fromBase)
-    .toString(input.toBase)
-    .toUpperCase();
+  return parseInt(number, fromBase).toString(toBase).toUpperCase()
+}
+
+function validateInput(number: string, fromBase: number) {
+  const validChars = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ".slice(
+    0,
+    fromBase
+  );
+  const regex = new RegExp(`^[${validChars}]+$`, "i");
+
+  if (!regex.test(number)) {
+    throw new Error(
+      `The number contains invalid characters for base ${fromBase}.`
+    );
+  }
 }

@@ -1,14 +1,18 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
-import "./globals.css";
-import Navbar from "./components/Navbar";
+
 import { Analytics } from "@vercel/analytics/next";
+
+import "./globals.css";
+
+import { Inter } from "next/font/google";
+
+import Navbar from "./components/Navbar";
 
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Kalkulator",
   description: "Calculator for all your needs",
+  title: "Kalkulator",
 };
 
 export default function RootLayout({
