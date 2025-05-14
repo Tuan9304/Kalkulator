@@ -1,23 +1,50 @@
 import React from "react";
+import { useFormContext } from "react-hook-form";
 
 import { cn } from "@/lib/utils";
 
-import { FormControl, FormItem, FormLabel } from "./ui/form";
-import { RadioGroupItem } from "./ui/radio-group";
+import {
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "./ui/form";
+import { RadioGroup } from "./ui/radio-group";
 
 export type FormRadioProps = {
+  children?: React.ReactNode;
   className?: string;
   label: string;
-  value: string;
+  name: string;
 };
 
-export default function FormRadio({ className, label, value }: FormRadioProps) {
+export default function FormRadio({
+  children,
+  className,
+  label,
+  name,
+}: FormRadioProps) {
+  const form = useFormContext();
   return (
-    <FormItem className={cn("flex items-center", className)}>
-      <FormControl>
-        <RadioGroupItem className="bg-white" value={value} />
-      </FormControl>
-      <FormLabel>{label}</FormLabel>
-    </FormItem>
+    <FormField
+      control={form.control}
+      name={name}
+      render={({ field }) => (
+        <FormItem className={cn("grid gap-2", className)}>
+          <FormLabel>{label}</FormLabel>
+          <FormControl>
+            <RadioGroup
+              className="flex"
+              defaultValue={field.value}
+              onValueChange={field.onChange}
+            >
+              {children}
+            </RadioGroup>
+          </FormControl>
+          <FormMessage />
+        </FormItem>
+      )}
+    />
   );
 }

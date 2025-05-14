@@ -7,8 +7,7 @@ import { z } from "zod";
 
 import FormInput from "@/components/FormInput";
 import { SubmitButton } from "@/components/SubmitButton";
-import { Form, FormField } from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
+import { Form } from "@/components/ui/form";
 
 import { baseConverterSchema } from "./schema";
 import { baseConvert } from "./utils";
@@ -34,40 +33,22 @@ export default function BaseConverter() {
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)}>
-        <FormField
-          control={form.control}
+        <FormInput
+          label="Number"
           name="number"
-          render={({ field }) => (
-            <FormInput label="Number">
-              <Input placeholder="Enter number to convert" {...field} />
-            </FormInput>
-          )}
+          placeholder="Enter number to convert"
         />
-        <FormField
-          control={form.control}
+        <FormInput
+          label="From Base"
           name="fromBase"
-          render={({ field }) => (
-            <FormInput label="From Base">
-              <Input
-                placeholder="Enter base of the number"
-                type="number"
-                {...field}
-              />
-            </FormInput>
-          )}
+          placeholder="Enter base of the number"
+          type="number"
         />
-        <FormField
-          control={form.control}
+        <FormInput
+          label="To Base"
           name="toBase"
-          render={({ field }) => (
-            <FormInput label="To Base">
-              <Input
-                placeholder="Enter base to convert to"
-                type="number"
-                {...field}
-              />
-            </FormInput>
-          )}
+          placeholder="Enter base of the number"
+          type="number"
         />
         <SubmitButton />
       </form>

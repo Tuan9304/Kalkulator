@@ -8,7 +8,7 @@ export function SubmitButton() {
   const { pending } = useFormStatus();
 
   return (
-    <Button className="btn-primary" disabled={pending} type="submit">
+    <Button className="hover:bg-primary/80" disabled={pending} type="submit">
       Calculate
     </Button>
   );

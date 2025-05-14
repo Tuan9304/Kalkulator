@@ -7,10 +7,9 @@ import { z } from "zod";
 
 import FormInput from "@/components/FormInput";
 import FormRadio from "@/components/FormRadio";
+import RadioInput from "@/components/RadioInput";
 import { SubmitButton } from "@/components/SubmitButton";
-import { Form, FormField } from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
-import { RadioGroup } from "@/components/ui/radio-group";
+import { Form } from "@/components/ui/form";
 
 import { vigenereCipherSchema } from "./schema";
 import { vigenereEncrypt } from "./utils";
@@ -35,43 +34,20 @@ export default function VigenereCipher() {
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)}>
-        <FormField
-          control={form.control}
+        <FormInput
+          label="Text"
           name="text"
-          render={({ field }) => (
-            <FormInput label="Text">
-              <Input placeholder="Enter text to encrypt/decrypt" {...field} />
-            </FormInput>
-          )}
+          placeholder="Enter text to encrypt/decrypt"
         />
-        <FormField
-          control={form.control}
+        <FormInput
+          label="Key"
           name="key"
-          render={({ field }) => (
-            <FormInput label="Key">
-              <Input
-                placeholder="Enter key for encryption/decryption"
-                {...field}
-              />
-            </FormInput>
-          )}
+          placeholder="Enter key for encryption/decryption"
         />
-        <FormField
-          control={form.control}
-          name="action"
-          render={({ field }) => (
-            <FormInput label="Action">
-              <RadioGroup
-                className="flex"
-                defaultValue={field.value}
-                onValueChange={field.onChange}
-              >
-                <FormRadio label="Encrypt" value="encrypt" />
-                <FormRadio label="Decrypt" value="decrypt" />
-              </RadioGroup>
-            </FormInput>
-          )}
-        />
+        <FormRadio label="Action" name="action">
+          <RadioInput label="Encrypt" value="encrypt" />
+          <RadioInput label="Decrypt" value="decrypt" />
+        </FormRadio>
         <SubmitButton />
       </form>
       <p>Result: {result}</p>
