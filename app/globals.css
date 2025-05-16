@@ -158,5 +158,5 @@ main nav {
 }
 
 form {
-  @apply flex w-full max-w-xs flex-col gap-6 bg-primary/5 rounded-md p-6 mx-auto;
+  @apply flex flex-col w-full gap-6;
 }

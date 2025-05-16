@@ -9,6 +9,13 @@ import FormInput from "@/components/FormInput";
 import FormRadio from "@/components/FormRadio";
 import RadioInput from "@/components/RadioInput";
 import { SubmitButton } from "@/components/SubmitButton";
+import {
+  Card,
+  CardContent,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 import { Form } from "@/components/ui/form";
 
 import { caesarCipherSchema } from "./schema";
@@ -33,26 +40,35 @@ export default function CaesarCipher() {
   };
 
   return (
-    <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)}>
-        <FormInput
-          label="Text"
-          name="text"
-          placeholder="Enter text to encrypt/decrypt"
-        />
-        <FormInput
-          label="Shift"
-          name="shift"
-          placeholder="Enter number of shifts right"
-          type="number"
-        />
-        <FormRadio label="Action" name="action">
-          <RadioInput label="Encrypt" value="encrypt" />
-          <RadioInput label="Decrypt" value="decrypt" />
-        </FormRadio>
-        <SubmitButton />
-      </form>
-      <p>Result: {result}</p>
-    </Form>
+    <Card className="max-w-sm bg-primary/5 mx-auto">
+      <CardHeader>
+        <CardTitle>Caesar Cipher Encryption</CardTitle>
+      </CardHeader>
+      <CardContent>
+        <Form {...form}>
+          <form onSubmit={form.handleSubmit(onSubmit)}>
+            <FormInput
+              label="Text"
+              name="text"
+              placeholder="Enter text to encrypt/decrypt"
+            />
+            <FormInput
+              label="Shift"
+              name="shift"
+              placeholder="Enter number of shifts right"
+              type="number"
+            />
+            <FormRadio label="Action" name="action">
+              <RadioInput label="Encrypt" value="encrypt" />
+              <RadioInput label="Decrypt" value="decrypt" />
+            </FormRadio>
+            <SubmitButton />
+          </form>
+        </Form>
+      </CardContent>
+      <CardFooter>
+        <p>Result: {result}</p>
+      </CardFooter>
+    </Card>
   );
 }

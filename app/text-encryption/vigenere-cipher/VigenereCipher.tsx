@@ -9,6 +9,13 @@ import FormInput from "@/components/FormInput";
 import FormRadio from "@/components/FormRadio";
 import RadioInput from "@/components/RadioInput";
 import { SubmitButton } from "@/components/SubmitButton";
+import {
+  Card,
+  CardContent,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 import { Form } from "@/components/ui/form";
 
 import { vigenereCipherSchema } from "./schema";
@@ -32,25 +39,34 @@ export default function VigenereCipher() {
     setResult(result);
   };
   return (
-    <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)}>
-        <FormInput
-          label="Text"
-          name="text"
-          placeholder="Enter text to encrypt/decrypt"
-        />
-        <FormInput
-          label="Key"
-          name="key"
-          placeholder="Enter key for encryption/decryption"
-        />
-        <FormRadio label="Action" name="action">
-          <RadioInput label="Encrypt" value="encrypt" />
-          <RadioInput label="Decrypt" value="decrypt" />
-        </FormRadio>
-        <SubmitButton />
-      </form>
-      <p>Result: {result}</p>
-    </Form>
+    <Card className="max-w-sm bg-primary/5 mx-auto">
+      <CardHeader>
+        <CardTitle>Vigenère Cipher Encryption</CardTitle>
+      </CardHeader>
+      <CardContent>
+        <Form {...form}>
+          <form onSubmit={form.handleSubmit(onSubmit)}>
+            <FormInput
+              label="Text"
+              name="text"
+              placeholder="Enter text to encrypt/decrypt"
+            />
+            <FormInput
+              label="Key"
+              name="key"
+              placeholder="Enter key for encryption/decryption"
+            />
+            <FormRadio label="Action" name="action">
+              <RadioInput label="Encrypt" value="encrypt" />
+              <RadioInput label="Decrypt" value="decrypt" />
+            </FormRadio>
+            <SubmitButton />
+          </form>
+        </Form>
+      </CardContent>
+      <CardFooter>
+        <p>Result: {result}</p>
+      </CardFooter>
+    </Card>
   );
 }
