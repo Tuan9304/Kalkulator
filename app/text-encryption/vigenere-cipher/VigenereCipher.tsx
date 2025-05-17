@@ -7,6 +7,7 @@ import { z } from "zod";
 
 import FormInput from "@/components/FormInput";
 import FormRadio from "@/components/FormRadio";
+import { OutputWithCopy } from "@/components/OutputWithCopy";
 import RadioInput from "@/components/RadioInput";
 import { SubmitButton } from "@/components/SubmitButton";
 import {
@@ -65,7 +66,7 @@ export default function VigenereCipher() {
         </Form>
       </CardContent>
       <CardFooter>
-        <p>Result: {result}</p>
+        {result && <OutputWithCopy className="w-full" value={result} />}
       </CardFooter>
     </Card>
   );
