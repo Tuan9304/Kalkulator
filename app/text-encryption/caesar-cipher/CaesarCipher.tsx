@@ -41,7 +41,7 @@ export default function CaesarCipher() {
   };
 
   return (
-    <Card className="max-w-sm bg-primary/5 mx-auto">
+    <Card className="max-w-sm bg-slate-100 mx-auto">
       <CardHeader>
         <CardTitle>Caesar Cipher Encryption</CardTitle>
       </CardHeader>
