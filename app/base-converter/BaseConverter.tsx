@@ -6,8 +6,8 @@ import { useForm } from "react-hook-form";
 import { z } from "zod";
 
 import FormInput from "@/components/FormInput";
-import { OutputWithCopy } from "@/components/OutputWithCopy";
-import { SubmitButton } from "@/components/SubmitButton";
+import OutputWithCopy from "@/components/OutputWithCopy";
+import SubmitButton from "@/components/SubmitButton";
 import {
   Card,
   CardContent,

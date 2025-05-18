@@ -1,3 +1,5 @@
+"use client";
+
 import { VariantProps } from "class-variance-authority";
 import { CheckIcon, ClipboardIcon } from "lucide-react";
 import React from "react";

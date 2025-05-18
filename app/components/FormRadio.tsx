@@ -1,3 +1,5 @@
+"use client";
+
 import React from "react";
 import { useFormContext } from "react-hook-form";
 
@@ -12,7 +14,7 @@ import {
 } from "./ui/form";
 import { RadioGroup } from "./ui/radio-group";
 
-export type FormRadioProps = {
+type FormRadioProps = {
   children?: React.ReactNode;
   className?: string;
   label: string;

@@ -1,3 +1,5 @@
+"use client";
+
 import React from "react";
 import { useFormContext } from "react-hook-form";
 
@@ -12,7 +14,7 @@ import {
 } from "./ui/form";
 import { Input } from "./ui/input";
 
-export type FormInputProps = {
+type FormInputProps = {
   className?: string;
   label: string;
   name: string;

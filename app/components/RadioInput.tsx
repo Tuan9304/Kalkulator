@@ -5,7 +5,7 @@ import { cn } from "@/lib/utils";
 import { FormControl, FormItem, FormLabel } from "./ui/form";
 import { RadioGroupItem } from "./ui/radio-group";
 
-export type RadioInputProps = {
+type RadioInputProps = {
   className?: string;
   label: string;
   value: string;

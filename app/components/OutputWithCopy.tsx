@@ -12,7 +12,7 @@ export type OutputWithCopyProps = {
   value: string;
 };
 
-export function OutputWithCopy({
+export default function OutputWithCopy({
   className,
   label,
   value,
